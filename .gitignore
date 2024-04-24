@@ -1,0 +1,6 @@
+**/__pycache__
+**/migrations
+.venv/
+media/
+*.sqlite3
+secrets.py
