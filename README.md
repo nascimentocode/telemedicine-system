@@ -10,7 +10,6 @@ A telemedicina é um campo da medicina que utiliza tecnologias de comunicação,
 
 Certifique-se de ter o Python e o Django instalados em sua máquina antes de prosseguir.
 
-
 1. Clone este repositório:
 
     Utilizando HTTPS:
