@@ -22,3 +22,9 @@ Certifique-se de ter o Python e o Django instalados em sua máquina antes de pro
     ```bash
     git clone git@github.com:nascimentocode/telemedicine-system.git
     ```
+
+2. **Instale as Dependências**: Certifique-se de ter todas as dependências instaladas. Você pode fazer isso executando o seguinte comando no terminal:
+
+      ```bash
+      pip install -r requirements.txt
+      ```
