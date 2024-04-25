@@ -20,5 +20,5 @@ Certifique-se de ter o Python e o Django instalados em sua máquina antes de pro
     ou utilizando o SSH:
       
     ```bash
-    git clone git@github.com:nascimentocode/budget-issuance-automation.git
+    git clone git@github.com:nascimentocode/telemedicine-system.git
     ```
