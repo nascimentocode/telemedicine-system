@@ -12,13 +12,13 @@ Certifique-se de ter o Python e o Django instalados em sua máquina antes de pro
 
 1. Clone este repositório:
 
-  Utilizando HTTPS:
-  ```bash
-  git clone https://github.com/nascimentocode/budget-issuance-automation.git
-  ```
-    
-  ou utilizando o SSH:
-    
-  ```bash
-  git clone git@github.com:nascimentocode/budget-issuance-automation.git
-  ```
+    Utilizando HTTPS:
+    ```bash
+    git clone https://github.com/nascimentocode/budget-issuance-automation.git
+    ```
+      
+    ou utilizando o SSH:
+      
+    ```bash
+    git clone git@github.com:nascimentocode/budget-issuance-automation.git
+    ```
