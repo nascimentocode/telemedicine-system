@@ -23,13 +23,16 @@
     <form action="{% url 'minhas_consultas' %}" method="GET">
         <div class="row">
             <div class="col-md">
-                <input
-                    type="text"
-                    name="especialidades"
-                    id=""
-                    class="form-control shadow-main-color"
-                    placeholder="Especialidades médias"
-                />
+                <select
+                    name="especialidade"
+                    class="form-select shadow-main-color"
+                >
+                    {% for especialidade in especialidades%}
+                    <option value="{{especialidade.id}}">
+                        {{especialidade.especialidade}}
+                    </option>
+                    {% endfor %}
+                </select>
             </div>
             <div class="col-md">
                 <input
