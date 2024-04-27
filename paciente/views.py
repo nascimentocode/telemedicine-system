@@ -4,9 +4,10 @@ from .models import Consulta, Documento
 from datetime import datetime
 from django.contrib import messages
 from django.contrib.messages import constants
+from django.contrib.auth.decorators import login_required
 
 
-# Create your views here.
+@login_required
 def home(request):
     if request.method == "GET":
         medico_filtrar = request.GET.get("medico")
@@ -33,6 +34,7 @@ def home(request):
         )
 
 
+@login_required
 def escolher_horario(request, id_dados_medicos):
     if request.method == "GET":
         medico = DadosMedico.objects.get(id=id_dados_medicos)
@@ -54,6 +56,7 @@ def escolher_horario(request, id_dados_medicos):
         )
 
 
+@login_required
 def agendar_horario(request, id_data_aberta):
     if request.method == "GET":
         data_aberta = DatasAbertas.objects.get(id=id_data_aberta)
@@ -71,10 +74,13 @@ def agendar_horario(request, id_data_aberta):
         return redirect("/pacientes/minhas_consultas/")
 
 
+@login_required
 def minhas_consultas(request):
     if request.method == "GET":
-        especialidade_consulta_filtrar = request.GET.get("especialidades")
+        especialidade_consulta_filtrar = request.GET.get("especialidade")
         data_consulta_filtrar = request.GET.get("data")
+
+        print(especialidade_consulta_filtrar)
 
         minhas_consultas = (
             Consulta.objects.filter(paciente=request.user)
@@ -82,31 +88,30 @@ def minhas_consultas(request):
             .order_by("data_aberta__data")
         )
 
-        print(minhas_consultas.values("data_aberta__data"))
-
-        # if especialidade_consulta_filtrar:
-        #     dado_medico = DadosMedico.objects.get(
-        #         user=minhas_consultas.data_aberta.user
-        #     )
-        #     minhas_consultas = dado_medico.objects.filter(
-        #         especialidade=especialidade_consulta_filtrar
-        #     )
+        if especialidade_consulta_filtrar:
+            minhas_consultas = minhas_consultas.filter(
+                data_aberta__user__dadosmedico__especialidade__id=especialidade_consulta_filtrar
+            )
 
         if data_consulta_filtrar:
             minhas_consultas = minhas_consultas.filter(
-                data_aberta__data__icontains=data_consulta_filtrar
+                data_aberta__data__gte=data_consulta_filtrar
             )
+
+        especialidades = Especialidades.objects.all()
 
         return render(
             request,
             "minhas_consultas.html",
             {
                 "minhas_consultas": minhas_consultas,
+                "especialidades": especialidades,
                 "is_medico": is_medico(request.user),
             },
         )
 
 
+@login_required
 def consulta(request, id_consulta):
     if request.method == "GET":
         consulta = Consulta.objects.get(id=id_consulta)
@@ -124,6 +129,7 @@ def consulta(request, id_consulta):
         )
 
 
+@login_required
 def cancelar_consulta(request, id_consulta):
     consulta = Consulta.objects.get(id=id_consulta)
 
